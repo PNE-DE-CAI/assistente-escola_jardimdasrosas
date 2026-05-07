@@ -1,186 +1,351 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Assistente Jardim das Rosas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assistente Jardim das Rosas</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-<style>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #0a2f6c, #041a3a);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-body {
-  font-family: 'Inter', sans-serif;
-  background: linear-gradient(145deg, #0a2f6c, #041a3a);
-  margin: 0;
-  padding: 20px;
-}
+        .main-container {
+            width: 100%;
+            max-width: 800px;
+            background: #0f1a24;
+            border-radius: 40px;
+            padding: 20px;
+            border: 1px solid #d32f2f;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
 
-/* container igual ao seu layout */
-.main-container {
-  max-width: 1000px;
-  margin: auto;
-  background: #0f1a24;
-  border-radius: 40px;
-  padding: 20px;
-  border: 1px solid #d32f2f;
-}
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10,47,108,0.85);
+            padding: 12px 20px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+        }
 
-/* HEADER (igual ao seu sistema) */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(10,47,108,0.85);
-  padding: 12px 20px;
-  border-radius: 50px;
-  margin-bottom: 20px;
-}
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-.logo-area {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+        .logo-area img {
+            height: 45px;
+            background: white;
+            border-radius: 10px;
+            padding: 4px;
+        }
 
-.logo-area img {
-  height: 45px;
-  background: white;
-  border-radius: 10px;
-  padding: 4px;
-}
+        .logo-area span {
+            color: #ffec9e;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
 
-.logo-area span {
-  color: #ffec9e;
-  font-weight: 600;
-}
+        .title-badge {
+            background: #d32f2f;
+            color: white;
+            padding: 6px 15px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
 
-.title-badge {
-  background: #d32f2f;
-  color: white;
-  padding: 6px 15px;
-  border-radius: 30px;
-  font-weight: bold;
-}
+        .chat-card {
+            background: white;
+            border-radius: 25px;
+            padding: 25px;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
+        }
 
-/* CARD */
-.chat-card {
-  background: white;
-  border-radius: 25px;
-  padding: 20px;
-}
+        .chat-card h3 {
+            margin-top: 0;
+            color: #0a2f6c;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
 
-/* CHAT */
-#chat-box {
-  height: 350px;
-  overflow-y: auto;
-  border: 1px solid #ddd;
-  padding: 12px;
-  border-radius: 15px;
-  margin-bottom: 10px;
-}
+        #chat-box {
+            height: 380px;
+            overflow-y: auto;
+            border: 1px solid #eee;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            background: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
 
-.user {
-  text-align: right;
-  color: #0a2f6c;
-  margin: 5px;
-}
+        .message {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 15px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
 
-.bot {
-  text-align: left;
-  color: #333;
-  margin: 5px;
-}
+        .user {
+            align-self: flex-end;
+            background: #0a2f6c;
+            color: white;
+            border-bottom-right-radius: 2px;
+        }
 
-/* INPUT */
-.input-area {
-  display: flex;
-  gap: 10px;
-}
+        .bot {
+            align-self: flex-start;
+            background: #e9e9e9;
+            color: #333;
+            border-bottom-left-radius: 2px;
+            border-left: 4px solid #d32f2f;
+        }
 
-input {
-  flex: 1;
-  padding: 10px;
-  border-radius: 20px;
-  border: 1px solid #ccc;
-}
+        .input-area {
+            display: flex;
+            gap: 10px;
+        }
 
-button {
-  background: #d32f2f;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 20px;
-  cursor: pointer;
-}
+        input {
+            flex: 1;
+            padding: 12px 20px;
+            border-radius: 30px;
+            border: 2px solid #ddd;
+            outline: none;
+            transition: border-color 0.3s;
+            font-size: 1rem;
+        }
 
-button:hover {
-  background: #b71c1c;
-}
+        input:focus {
+            border-color: #0a2f6c;
+        }
 
-</style>
+        button {
+            background: #d32f2f;
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #b71c1c;
+            transform: scale(1.05);
+        }
+
+        /* Scrollbar customizada */
+        #chat-box::-webkit-scrollbar {
+            width: 6px;
+        }
+        #chat-box::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 10px;
+        }
+    </style>
 </head>
-
 <body>
 
 <div class="main-container">
-
-  <!-- HEADER -->
-  <div class="header">
-    <div class="logo-area">
-      <img src="https://i.ibb.co/0p01LzxB/logo3de.jpg">
-      <span>Jardim das Rosas</span>
+    <div class="header">
+        <div class="logo-area">
+            <img src="https://i.ibb.co/0p01LzxB/logo3de.jpg" alt="Logo">
+            <span>Jardim das Rosas</span>
+        </div>
+        <div class="title-badge">Assistente Pedagógico</div>
     </div>
-    <div class="title-badge">Assistente Pedagógico</div>
-  </div>
 
-  <!-- CHAT -->
-  <div class="chat-card">
-    <h3>🌹 Assistente Pedagógico Escolar</h3>
+    <div class="chat-card">
+        <h3>🌹 Olá! Como posso ajudar nos seus estudos?</h3>
+        <div id="chat-box">
+            <div class="message bot">Olá! Eu sou o assistente do Jardim das Rosas. Você pode me perguntar sobre gramática, figuras de linguagem ou tipos de texto!</div>
+        </div>
 
-    <div id="chat-box"></div>
-
-    <div class="input-area">
-      <input id="userInput" placeholder="Digite sua pergunta...">
-      <button onclick="sendMessage()">Enviar</button>
+        <div class="input-area">
+            <input type="text" id="userInput" placeholder="Digite um tema ou pergunta (ex: substantivo)..." autocomplete="off">
+            <button onclick="sendMessage()">Enviar</button>
+        </div>
     </div>
-  </div>
-
 </div>
 
-<script src="dados.js"></script>
-
 <script>
+const baseConhecimento = [
+    { pergunta: "o que é pontuação", keywords: ["pontuação", "sinais", "vírgula", "ponto"], resposta: "Pontuação é o uso de sinais gráficos para organizar frases e textos, indicando pausas e entonações." },
+    { pergunta: "o que é ideia central", keywords: ["ideia central", "principal", "tema"], resposta: "A ideia central é o núcleo do texto, a mensagem principal que o autor deseja transmitir." },
+    { pergunta: "tipos de sílabas", keywords: ["sílabas", "sílaba", "divisão"], resposta: "As sílabas podem ser tônicas (fortes) ou átonas (fracas), e variam conforme o número de vogais e consoantes." },
+    { pergunta: "o que é narrativa", keywords: ["narrativa", "história", "conto", "narrar"], resposta: "Narrativa é um gênero textual que relata uma sequência de fatos vividos por personagens em um tempo e espaço." },
+    { pergunta: "o que é substantivo", keywords: ["substantivo", "nome", "nomear"], resposta: "Substantivo é a classe de palavras que nomeia seres, objetos, fenômenos, lugares e sentimentos." },
+    { pergunta: "o que é adjetivo", keywords: ["adjetivo", "qualidade", "característica"], resposta: "Adjetivo é a palavra que expressa uma qualidade, defeito, estado ou particularidade do substantivo." },
+    { pergunta: "o que é verbo", keywords: ["verbo", "ação", "estado", "fenômeno"], resposta: "Verbo é a palavra que indica ação, estado, mudança de estado ou fenômeno da natureza." },
+    { pergunta: "o que é artigo", keywords: ["artigo", "definido", "indefinido"], resposta: "Artigo é a palavra que antecede o substantivo para determiná-lo de forma precisa ou vaga." },
+    { pergunta: "o que é pronome", keywords: ["pronome", "substitui", "acompanha"], resposta: "Pronome é a palavra que substitui ou acompanha o nome, indicando sua posição em relação às pessoas do discurso." },
+    { pergunta: "o que é advérbio", keywords: ["advérbio", "circunstância", "tempo", "modo"], resposta: "Advérbio é a palavra invariável que modifica o sentido do verbo, do adjetivo ou de outro advérbio." },
+    { pergunta: "o que é preposição", keywords: ["preposição", "ligação", "conectar"], resposta: "Preposição é a palavra invariável que liga dois termos de uma oração, estabelecendo relação entre eles." },
+    { pergunta: "o que é conjunção", keywords: ["conjunção", "conectivo", "ligar orações"], resposta: "Conjunção é a palavra que liga duas orações ou dois termos de mesma função sintática." },
+    { pergunta: "o que é interjeição", keywords: ["interjeição", "emoção", "sentimento"], resposta: "Interjeição é a palavra que exprime emoções, sensações, estados de espírito ou apelos." },
+    { pergunta: "o que é numeral", keywords: ["numeral", "número", "quantidade", "ordem"], resposta: "Numeral é a palavra que indica quantidade exata de seres ou o lugar que eles ocupam numa série." },
+    { pergunta: "o que é sujeito", keywords: ["sujeito", "quem faz a ação"], resposta: "Sujeito é o termo da oração sobre o qual se declara algo e com o qual o verbo concorda." },
+    { pergunta: "o que é predicado", keywords: ["predicado", "ação do sujeito"], resposta: "Predicado é o termo da oração que contém o verbo e informa algo sobre o sujeito." },
+    { pergunta: "o que é ditongo", keywords: ["ditongo", "encontro vocálico"], resposta: "Ditongo é o encontro de uma vogal e uma semivogal (ou vice-versa) na mesma sílaba." },
+    { pergunta: "o que é hiato", keywords: ["hiato", "separação de vogais"], resposta: "Hiato é o encontro de duas vogais em sílabas diferentes." },
+    { pergunta: "o que são oxítonas", keywords: ["oxítonas", "oxítona", "última tônica"], resposta: "São palavras cuja última sílaba é a mais forte (tônica)." },
+    { pergunta: "o que são paroxítonas", keywords: ["paroxítonas", "paroxítona", "penúltima tônica"], resposta: "São palavras cuja penúltima sílaba é a mais forte (tônica)." },
+    { pergunta: "o que são proparoxítonas", keywords: ["proparoxítonas", "proparoxítona", "antepenúltima"], resposta: "São palavras cuja antepenúltima sílaba é a mais forte. Todas são acentuadas." },
+    { pergunta: "o que é sinônimo", keywords: ["sinônimo", "igual", "semelhante"], resposta: "Sinônimos são palavras diferentes que possuem significados quase iguais." },
+    { pergunta: "o que é antônimo", keywords: ["antônimo", "contrário", "oposto"], resposta: "Antônimos são palavras que possuem significados opostos entre si." },
+    { pergunta: "o que é homônimo", keywords: ["homônimo", "mesmo som", "mesma escrita"], resposta: "Homônimos são palavras com a mesma pronúncia ou escrita, mas sentidos diferentes." },
+    { pergunta: "o que é parônimo", keywords: ["parônimo", "parecido"], resposta: "Parônimos são palavras parecidas na escrita e no som, mas com significados distintos." },
+    { pergunta: "o que é metáfora", keywords: ["metáfora", "comparação implícita"], resposta: "Metáfora é uma figura de linguagem que faz uma comparação sem usar o 'como'." },
+    { pergunta: "o que é comparação", keywords: ["comparação", "simile", "como"], resposta: "É uma figura de linguagem que aproxima dois elementos por semelhança usando conectivos comparativos." },
+    { pergunta: "o que é hipérbole", keywords: ["hipérbole", "exagero"], resposta: "Hipérbole é a figura de linguagem que expressa uma ideia com exagero intencional." },
+    { pergunta: "o que é eufemismo", keywords: ["eufemismo", "suavizar"], resposta: "Eufemismo é usado para suavizar uma informação desagradável ou chocante." },
+    { pergunta: "o que é ironia", keywords: ["ironia", "deboche", "sátira"], resposta: "Ironia consiste em dizer o contrário do que se pretende, geralmente com tom sarcástico." },
+    { pergunta: "o que é personificação", keywords: ["personificação", "prosopopeia", "humano"], resposta: "É atribuir características ou sentimentos humanos a seres inanimados ou animais." },
+    { pergunta: "o que é aliteração", keywords: ["aliteração", "repetição som", "consoante"], resposta: "Aliteração é a repetição de sons consonantais semelhantes em um texto ou verso." },
+    { pergunta: "o que é onomatopeia", keywords: ["onomatopeia", "som", "ruído"], resposta: "Onomatopeia é a reprodução escrita de um som ou ruído (ex: tique-taque)." },
+    { pergunta: "o que é pleonasmo", keywords: ["pleonasmo", "repetição"], resposta: "Pleonasmo é a repetição de um termo ou ideia para reforçar o sentido." },
+    { pergunta: "o que é antítese", keywords: ["antítese", "ideias opostas"], resposta: "Antítese é a aproximação de termos que têm sentidos opostos." },
+    { pergunta: "o que é paradoxo", keywords: ["paradoxo", "contradição"], resposta: "Paradoxo é uma contradição lógica que cria um sentido profundo ou poético." },
+    { pergunta: "o que é crônica", keywords: ["crônica", "cotidiano"], resposta: "Crônica é um gênero narrativo curto que trata de assuntos do dia a dia." },
+    { pergunta: "o que é conto", keywords: ["conto", "ficção curta"], resposta: "Conto é uma narrativa curta com poucos personagens e um conflito único." },
+    { pergunta: "o que é fábula", keywords: ["fábula", "moral", "animais"], resposta: "Fábula é uma história curta onde animais falam e que termina com uma lição de moral." },
+    { pergunta: "o que é romance", keywords: ["romance", "livro longo"], resposta: "Romance é uma narrativa longa, com trama complexa e vários núcleos de personagens." },
+    { pergunta: "o que é notícia", keywords: ["notícia", "jornalismo", "atualidade"], resposta: "Notícia é um texto informativo sobre um fato recente e de interesse geral." },
+    { pergunta: "o que é reportagem", keywords: ["reportagem", "investigação"], resposta: "Reportagem é um texto jornalístico mais extenso e detalhado que a notícia." },
+    { pergunta: "o que é biografia", keywords: ["biografia", "vida de alguém"], resposta: "Biografia é o relato escrito da vida de uma pessoa específica." },
+    { pergunta: "o que é resenha", keywords: ["resenha", "crítica", "opinião"], resposta: "Resenha é um texto que resume uma obra e apresenta uma opinião crítica sobre ela." },
+    { pergunta: "o que é texto dissertativo", keywords: ["dissertativo", "argumentativo", "redação"], resposta: "É um texto que expõe um ponto de vista e usa argumentos para defendê-lo." },
+    { pergunta: "o que é texto injuntivo", keywords: ["injuntivo", "instrução", "receita"], resposta: "Texto que instrui o leitor a realizar uma ação (ex: manual, receita)." },
+    { pergunta: "o que é coesão", keywords: ["coesão", "conectivos", "ligação"], resposta: "Coesão é o uso de conectivos para ligar as partes de um texto de forma lógica." },
+    { pergunta: "o que é coerência", keywords: ["coerência", "sentido", "lógica"], resposta: "Coerência é a harmonia de ideias que faz com que o texto tenha sentido completo." },
+    { pergunta: "o que é denotação", keywords: ["denotação", "dicionário", "literal"], resposta: "Denotação é o uso da palavra em seu sentido real e objetivo." },
+    { pergunta: "o que é conotação", keywords: ["conotação", "figurado"], resposta: "Conotação é o uso da palavra em sentido figurado e subjetivo." },
+    { pergunta: "o que é crase", keywords: ["crase", "acentuação", "fusão"], resposta: "Crase é a fusão da preposição 'a' com o artigo feminino 'a'." },
+    { pergunta: "o que é vocativo", keywords: ["vocativo", "chamamento"], resposta: "Vocativo é o termo usado para chamar ou interpelar alguém na oração." },
+    { pergunta: "o que é aposto", keywords: ["aposto", "explicação"], resposta: "Aposto é um termo que explica, resume ou especifica um substantivo anterior." },
+    { pergunta: "o que é regência verbal", keywords: ["regência verbal", "verbo preposição"], resposta: "Regência verbal é a relação entre o verbo e seus complementos." },
+    { pergunta: "o que é concordância verbal", keywords: ["concordância verbal", "verbo sujeito"], resposta: "É a adaptação do verbo ao número e pessoa do sujeito." },
+    { pergunta: "o que é concordância nominal", keywords: ["concordância nominal", "substantivo adjetivo"], resposta: "É a harmonia de gênero e número entre o substantivo e seus acompanhantes." },
+    { pergunta: "o que é dígrafo", keywords: ["dígrafo", "duas letras um som"], resposta: "Dígrafo é o grupo de duas letras que representam um único fonema (ex: ch, lh)." },
+    { pergunta: "o que é encontro consonantal", keywords: ["encontro consonantal", "duas consoantes"], resposta: "É a sequência de duas ou mais consoantes em uma palavra, cada uma mantendo seu som." },
+    { pergunta: "o que é fonema", keywords: ["fonema", "som da fala"], resposta: "Fonema é a menor unidade sonora da língua que distingue significados." },
+    { pergunta: "o que é radical", keywords: ["radical", "base da palavra"], resposta: "Radical é a parte constante da palavra que contém o seu significado básico." },
+    { pergunta: "o que é sufixo", keywords: ["sufixo", "final da palavra"], resposta: "Sufixo é o elemento que se junta após o radical para formar uma nova palavra." },
+    { pergunta: "o que é prefixo", keywords: ["prefixo", "início da palavra"], resposta: "Prefixo é o elemento que se junta antes do radical para formar uma nova palavra." },
+    { pergunta: "o que é neologismo", keywords: ["neologismo", "palavra nova"], resposta: "Neologismo é a criação de uma palavra nova ou um novo sentido para uma palavra." },
+    { pergunta: "o que é arcaísmo", keywords: ["arcaísmo", "palavra antiga"], resposta: "Arcaísmo é o uso de palavras que já caíram em desuso na língua atual." },
+    { pergunta: "o que é gíria", keywords: ["gíria", "informal"], resposta: "Gíria é uma linguagem informal usada por determinados grupos sociais." },
+    { pergunta: "o que é regionalismo", keywords: ["regionalismo", "região", "sotaque"], resposta: "Regionalismo são palavras ou expressões típicas de uma determinada região geográfica." },
+    { pergunta: "o que é gênero lírico", keywords: ["lírico", "poesia", "emoção"], resposta: "Gênero focado na expressão de sentimentos, geralmente escrito em versos." },
+    { pergunta: "o que é gênero épico", keywords: ["épico", "herói", "epopeia"], resposta: "Gênero que narra grandes feitos heroicos e aventuras de um povo." },
+    { pergunta: "o que é gênero dramático", keywords: ["dramático", "teatro", "encenação"], resposta: "Gênero composto por textos feitos para serem representados no teatro." },
+    { pergunta: "o que é soneto", keywords: ["soneto", "poema fixo"], resposta: "Soneto é um poema de forma fixa com 14 versos (dois quartetos e dois tercetos)." },
+    { pergunta: "o que é verso", keywords: ["verso", "linha do poema"], resposta: "Verso é cada uma das linhas que compõem um poema." },
+    { pergunta: "o que é estrofe", keywords: ["estrofe", "conjunto de versos"], resposta: "Estrofe é o conjunto de versos em uma composição poética." },
+    { pergunta: "o que é rima", keywords: ["rima", "som igual"], resposta: "Rima é a coincidência de sons finais entre as palavras dos versos." },
+    { pergunta: "o que é romantismo", keywords: ["romantismo", "emoção", "liberdade"], resposta: "Movimento artístico que valoriza o sentimento, a subjetividade e a natureza." },
+    { pergunta: "o que é realismo", keywords: ["realismo", "objetividade", "crítica"], resposta: "Movimento que busca retratar a realidade de forma fiel e criticar a sociedade." },
+    { pergunta: "o que é modernismo", keywords: ["modernismo", "inovação", "ruptura"], resposta: "Movimento de ruptura com as artes tradicionais e busca pela identidade brasileira." },
+    { pergunta: "o que é barroco", keywords: ["barroco", "contraste", "excesso"], resposta: "Estilo marcado pela dualidade entre céu e terra, luz e sombra, e muitos detalhes." },
+    { pergunta: "o que é arcadismo", keywords: ["arcadismo", "campo", "simplicidade"], resposta: "Movimento que pregava a vida simples no campo e a valorização da natureza." },
+    { pergunta: "o que é parnasianismo", keywords: ["parnasianismo", "perfeição", "forma"], resposta: "Escola literária que buscava a perfeição formal e a objetividade na poesia." },
+    { pergunta: "o que é simbolismo", keywords: ["simbolismo", "mistério", "sonho"], resposta: "Movimento que valoriza o subjetivo, o místico e o espiritual através de símbolos." },
+    { pergunta: "o que é naturalismo", keywords: ["naturalismo", "ciência", "instinto"], resposta: "Extensão do Realismo que analisa o homem como um produto biológico e social." },
+    { pergunta: "o que é oração", keywords: ["oração", "frase com verbo"], resposta: "Oração é uma frase ou parte de frase que se organiza em torno de um verbo." },
+    { pergunta: "o que é frase", keywords: ["frase", "sentido completo"], resposta: "Frase é todo enunciado de sentido completo, podendo ter verbo ou não." },
+    { pergunta: "o que é período", keywords: ["período", "composto", "simples"], resposta: "Período é a frase constituída por uma (simples) ou mais orações (composto)." },
+    { pergunta: "o que é intertextualidade", keywords: ["intertextualidade", "diálogo entre textos"], resposta: "É quando um texto cita ou faz referência a outro texto já existente." },
+    { pergunta: "o que é polissemia", keywords: ["polissemia", "vários sentidos"], resposta: "Polissemia é a propriedade de uma palavra ter vários significados diferentes." },
+    { pergunta: "o que é ambiguidade", keywords: ["ambiguidade", "duplo sentido"], resposta: "Ambiguidade ocorre quando um texto permite mais de uma interpretação, causando confusão." },
+    { pergunta: "o que é elipse", keywords: ["elipse", "termo oculto"], resposta: "Elipse é a omissão de um termo que pode ser facilmente identificado pelo contexto." },
+    { pergunta: "o que é zeugma", keywords: ["zeugma", "repetição oculta"], resposta: "Zeugma é a omissão de um termo que já foi expresso anteriormente no texto." },
+    { pergunta: "o que é pleonasmo vicioso", keywords: ["vicioso", "erro", "subir para cima"], resposta: "É a repetição desnecessária de uma ideia, considerada um erro gramatical (ex: hemorragia de sangue)." },
+    { pergunta: "o que é catacrese", keywords: ["catacrese", "pé da mesa"], resposta: "É o uso de um termo figurado por falta de um termo próprio (ex: braço da poltrona)." },
+    { pergunta: "o que é metonímia", keywords: ["metonímia", "substituição"], resposta: "Substituição de um termo por outro com o qual tem relação (ex: Ler Machado de Assis em vez do livro dele)." },
+    { pergunta: "o que é sinestesia", keywords: ["sinestesia", "mistura de sentidos"], resposta: "Figura de linguagem que mistura sensações de diferentes sentidos (ex: cheiro doce)." },
+    { pergunta: "o que é assonância", keywords: ["assonância", "repetição vogal"], resposta: "Repetição de sons vocálicos semelhantes em um texto." },
+    { pergunta: "o que é polissíndeto", keywords: ["polissíndeto", "muitos 'e'"], resposta: "Repetição enfática de conjunções (geralmente o 'e') entre termos de uma frase." },
+    { pergunta: "o que é assíndeto", keywords: ["assíndeto", "sem conjunção"], resposta: "Omissão de conjunções, separando os termos apenas por vírgulas." },
+    { pergunta: "o que é hipérbato", keywords: ["hipérbato", "inversão da ordem"], resposta: "Inversão da ordem direta das palavras na frase." },
+    { pergunta: "o que é anáfora", keywords: ["anáfora", "repetição no início"], resposta: "Repetição de uma palavra ou expressão no início de versos ou frases seguidas." },
+    { pergunta: "o que é prosopopeia", keywords: ["prosopopeia", "animar objetos"], resposta: "O mesmo que personificação: dar vida ou sentimentos a coisas não humanas." },
+    { pergunta: "o que é literatura", keywords: ["literatura", "arte das palavras"], resposta: "É a arte de criar textos com valor estético, usando a linguagem de forma criativa." }
+];
 
 function encontrarResposta(perguntaUsuario) {
-  perguntaUsuario = perguntaUsuario.toLowerCase();
+    const busca = perguntaUsuario.toLowerCase().trim();
+    if (busca === "") return "Por favor, digite algo para que eu possa te ajudar!";
 
-  for (let item of baseConhecimento) {
-    if (perguntaUsuario.includes(item.pergunta)) {
-      return item.resposta;
+    // 1. Tenta encontrar por frase exata na pergunta
+    for (let item of baseConhecimento) {
+        if (busca.includes(item.pergunta.toLowerCase())) {
+            return item.resposta;
+        }
     }
-  }
 
-  return "Essa informação não está no material didático disponível.";
+    // 2. Tenta encontrar por palavra-chave (Keyword)
+    // Dividimos a frase do usuário em palavras para conferir uma por uma
+    const palavrasUsuario = busca.split(/\s+/);
+    for (let item of baseConhecimento) {
+        for (let kw of item.keywords) {
+            if (busca.includes(kw.toLowerCase())) {
+                return item.resposta;
+            }
+        }
+    }
+
+    return "Desculpe, ainda não tenho essa informação. Tente pesquisar por termos simples como 'substantivo', 'romantismo' ou 'crase'.";
 }
 
 function sendMessage() {
-  const input = document.getElementById("userInput");
-  const chatBox = document.getElementById("chat-box");
+    const input = document.getElementById("userInput");
+    const chatBox = document.getElementById("chat-box");
+    const texto = input.value;
 
-  const texto = input.value;
+    if (texto.trim() === "") return;
 
-  chatBox.innerHTML += `<p class="user"><strong>Você:</strong> ${texto}</p>`;
+    // Mensagem do Usuário
+    chatBox.innerHTML += `<div class="message user"><strong>Você:</strong> ${texto}</div>`;
 
-  const resposta = encontrarResposta(texto);
+    // Processar Resposta
+    const resposta = encontrarResposta(texto);
 
-  chatBox.innerHTML += `<p class="bot"><strong>Bot:</strong> ${resposta}</p>`;
+    // Resposta do Bot com delay
+    setTimeout(() => {
+        chatBox.innerHTML += `<div class="message bot"><strong>Assistente:</strong> ${resposta}</div>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }, 400);
 
-  input.value = "";
-
-  chatBox.scrollTop = chatBox.scrollHeight;
+    input.value = "";
+    chatBox.scrollTop = chatBox.scrollHeight;
 }
 
+// Ouvir a tecla Enter
+document.getElementById("userInput").addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+        sendMessage();
+    }
+});
 </script>
 
 </body>
