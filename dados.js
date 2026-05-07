@@ -1,6 +1,6 @@
 const baseConhecimento = [
   {
-    pergunta: "o que é pontuação",
+    pergunta: "o que é pontuação","pontuação" ,
     resposta: "Pontuação é o uso de sinais gráficos para organizar frases e textos."
   },
   {
