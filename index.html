@@ -1,310 +1,175 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assistente Jardim das Rosas</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assistente Jardim das Rosas</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(145deg, #0a2f6c, #041a3a);
-            margin: 0;
-            padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+<style>
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(145deg, #0a2f6c, #041a3a);
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-        .main-container {
-            width: 100%;
-            max-width: 800px;
-            background: #0f1a24;
-            border-radius: 40px;
-            padding: 20px;
-            border: 1px solid #d32f2f;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
+.main-container {
+  width: 100%;
+  max-width: 900px;
+  background: #0f1a24;
+  border-radius: 40px;
+  padding: 20px;
+  border: 1px solid #d32f2f;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(10,47,108,0.85);
-            padding: 12px 20px;
-            border-radius: 50px;
-            margin-bottom: 20px;
-        }
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(10,47,108,0.85);
+  padding: 12px 20px;
+  border-radius: 50px;
+  margin-bottom: 20px;
+}
 
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-        .logo-area img {
-            height: 45px;
-            background: white;
-            border-radius: 10px;
-            padding: 4px;
-        }
+.logo-area img {
+  height: 45px;
+  background: white;
+  border-radius: 10px;
+  padding: 4px;
+}
 
-        .logo-area span {
-            color: #ffec9e;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
+.logo-area span {
+  color: #ffec9e;
+  font-weight: 600;
+}
 
-        .title-badge {
-            background: #d32f2f;
-            color: white;
-            padding: 6px 15px;
-            border-radius: 30px;
-            font-weight: bold;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-        }
+.title-badge {
+  background: #d32f2f;
+  color: white;
+  padding: 6px 15px;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 0.85rem;
+}
 
-        .chat-card {
-            background: white;
-            border-radius: 25px;
-            padding: 25px;
-            box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
-        }
+.chat-card {
+  background: white;
+  border-radius: 25px;
+  padding: 25px;
+}
 
-        .chat-card h3 {
-            margin-top: 0;
-            color: #0a2f6c;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-        }
+#chat-box {
+  height: 420px;
+  overflow-y: auto;
+  border: 1px solid #eee;
+  padding: 15px;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  background: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
-        #chat-box {
-            height: 380px;
-            overflow-y: auto;
-            border: 1px solid #eee;
-            padding: 15px;
-            border-radius: 15px;
-            margin-bottom: 15px;
-            background: #f9f9f9;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+.message {
+  max-width: 85%;
+  padding: 12px 18px;
+  border-radius: 15px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
 
-        .message {
-            max-width: 80%;
-            padding: 10px 15px;
-            border-radius: 15px;
-            font-size: 0.95rem;
-            line-height: 1.4;
-        }
+.user {
+  align-self: flex-end;
+  background: #0a2f6c;
+  color: white;
+  border-bottom-right-radius: 2px;
+}
 
-        .user {
-            align-self: flex-end;
-            background: #0a2f6c;
-            color: white;
-            border-bottom-right-radius: 2px;
-        }
+.bot {
+  align-self: flex-start;
+  background: #e9e9e9;
+  color: #333;
+  border-bottom-left-radius: 2px;
+  border-left: 5px solid #d32f2f;
+}
 
-        .bot {
-            align-self: flex-start;
-            background: #e9e9e9;
-            color: #333;
-            border-bottom-left-radius: 2px;
-            border-left: 4px solid #d32f2f;
-        }
+.input-area {
+  display: flex;
+  gap: 10px;
+}
 
-        .input-area {
-            display: flex;
-            gap: 10px;
-        }
+input {
+  flex: 1;
+  padding: 15px 20px;
+  border-radius: 30px;
+  border: 2px solid #ddd;
+  outline: none;
+  font-size: 1rem;
+}
 
-        input {
-            flex: 1;
-            padding: 12px 20px;
-            border-radius: 30px;
-            border: 2px solid #ddd;
-            outline: none;
-            transition: border-color 0.3s;
-            font-size: 1rem;
-        }
+button {
+  background: #d32f2f;
+  color: white;
+  border: none;
+  padding: 0 30px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
 
-        input:focus {
-            border-color: #0a2f6c;
-        }
-
-        button {
-            background: #d32f2f;
-            color: white;
-            border: none;
-            padding: 0 25px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background: #b71c1c;
-            transform: scale(1.05);
-        }
-
-        /* Scrollbar customizada */
-        #chat-box::-webkit-scrollbar {
-            width: 6px;
-        }
-        #chat-box::-webkit-scrollbar-thumb {
-            background: #ccc;
-            border-radius: 10px;
-        }
-    </style>
+button:hover {
+  background: #b71c1c;
+}
+</style>
 </head>
+
 <body>
 
 <div class="main-container">
-    <div class="header">
-        <div class="logo-area">
-            <img src="https://i.ibb.co/0p01LzxB/logo3de.jpg" alt="Logo">
-            <span>Jardim das Rosas</span>
-        </div>
-        <div class="title-badge">Assistente Pedagógico</div>
+
+  <div class="header">
+    <div class="logo-area">
+      <img src="https://i.ibb.co/0p01LzxB/logo3de.jpg">
+      <span>Jardim das Rosas</span>
+    </div>
+    <div class="title-badge">Assistente Pedagógico</div>
+  </div>
+
+  <div class="chat-card">
+    <h3>🌹 Assistente Pedagógico Escolar</h3>
+
+    <div id="chat-box">
+      <div class="message bot">
+        Olá! Sou o assistente pedagógico da escola <b>Jardim das Rosas</b>.
+        Posso responder perguntas com base no material didático.
+      </div>
     </div>
 
-    <div class="chat-card">
-        <h3>🌹 Olá! Como posso ajudar nos seus estudos?</h3>
-        <div id="chat-box">
-            <div class="message bot">Olá! Eu sou o assistente do Jardim das Rosas. Você pode me perguntar sobre gramática, figuras de linguagem ou tipos de texto!</div>
-        </div>
-
-        <div class="input-area">
-            <input type="text" id="userInput" placeholder="Digite um tema ou pergunta (ex: substantivo)..." autocomplete="off">
-            <button onclick="sendMessage()">Enviar</button>
-        </div>
+    <div class="input-area">
+      <input id="userInput" placeholder="Digite sua pergunta..." autocomplete="off">
+      <button onclick="sendMessage()">Enviar</button>
     </div>
+  </div>
+
 </div>
 
-<script>
-const baseConhecimento =
-    // 1. DISPOSIÇÕES GERAIS E OBJETIVOS
-    { pergunta: "o que é a OMASP", keywords: ["omasp", "olimpíada", "matemática", "o que é"], resposta: "A OMASP é a Olimpíada de Matemática das Escolas Estaduais de São Paulo, realizada pela SEDUC-SP com apoio da AOBM." },
-    { pergunta: "qual o objetivo da OMASP", keywords: ["objetivo", "finalidade", "visa"], resposta: "Potencializar a aprendizagem de Matemática e melhorar a proficiência dos estudantes da rede estadual." },
-    { pergunta: "quais temas caem na prova", keywords: ["temas", "matéria", "conteúdo", "cai"], resposta: "Geometria, Aritmética, Álgebra, Números, Grandezas e Medidas, Probabilidade, Estatística e Lógica." },
-    { pergunta: "quem organiza a OMASP", keywords: ["organização", "quem faz", "responsável", "seduc"], resposta: "A Secretaria da Educação do Estado de São Paulo (SEDUC-SP) com apoio da Associação Olimpíada Brasileira de Matemática (AOBM)." },
-
-    // 2. PÚBLICO-ALVO E NÍVEIS
-    { pergunta: "quem pode participar da OMASP", keywords: ["participar", "quem", "público", "alunos"], resposta: "Estudantes do 6º ao 9º ano do Ensino Fundamental e todas as séries do Ensino Médio da rede pública estadual de SP." },
-    { pergunta: "o que é o Nível 1", keywords: ["nível 1", "6 ano", "7 ano"], resposta: "O Nível 1 da OMASP é voltado para estudantes matriculados no 6º e 7º anos do Ensino Fundamental." },
-    { pergunta: "o que é o Nível 2", keywords: ["nível 2", "8 ano", "9 ano"], resposta: "O Nível 2 da OMASP é voltado para estudantes matriculados no 8º e 9º anos do Ensino Fundamental." },
-    { pergunta: "o que é o Nível 3", keywords: ["nível 3", "ensino médio", "1 serie", "2 serie", "3 serie"], resposta: "O Nível 3 da OMASP é voltado para estudantes da 1ª, 2ª e 3ª séries do Ensino Médio." },
-    { pergunta: "alunos de escola integral podem participar", keywords: ["pei", "tempo integral", "integral"], resposta: "Sim, alunos de Escolas de Tempo Integral e de Ensino Regular podem participar normalmente." },
-
-    // 3. FASE I - PROVA PAULISTA
-    { pergunta: "como funciona a Fase 1", keywords: ["fase 1", "prova paulista", "inscrição"], resposta: "A Fase 1 utiliza a nota de Matemática da Prova Paulista do 1º Bimestre de 2026. A inscrição é automática." },
-    { pergunta: "quantos alunos passam para a Fase 2", keywords: ["classificação fase 1", "quantos passam", "30%"], resposta: "Passam para a Fase 2 os 30% dos estudantes com maior número de acertos por escola, ano e série." },
-    { pergunta: "o que acontece em caso de empate na Fase 1", keywords: ["empate fase 1", "nota de corte"], resposta: "Estudantes que tiverem a mesma nota de corte da escola também serão classificados para a Fase 2." },
-    { pergunta: "quando sai o resultado da Fase 1", keywords: ["resultado fase 1", "data resultado"], resposta: "O resultado será divulgado em até 12 dias úteis após o fim da Prova Paulista do 1º Bimestre de 2026." },
-
-    // 4. FASE II - CLASSIFICAÇÃO MUNICIPAL
-    { pergunta: "como é a prova da Fase 2", keywords: ["prova fase 2", "como é", "formato"], resposta: "É uma prova on-line com 20 questões de múltipla escolha, realizada obrigatoriamente na escola do estudante." },
-    { pergunta: "qual a duração da prova da Fase 2", keywords: ["tempo", "duração", "fase 2"], resposta: "O estudante tem 1 hora e 20 minutos para realizar a prova da Fase 2." },
-    { pergunta: "quando é a prova do Nível 3", keywords: ["data nível 3", "ensino médio", "19 de maio"], resposta: "A prova do Nível 3 (Ensino Médio) será realizada no dia 19 de maio de 2026." },
-    { pergunta: "quando é a prova do Nível 2", keywords: ["data nível 2", "8 e 9 ano", "20 de maio"], resposta: "A prova do Nível 2 (8º e 9º anos) será realizada no dia 20 de maio de 2026." },
-    { pergunta: "quando é a prova do Nível 1", keywords: ["data nível 1", "6 e 7 ano", "21 de maio"], resposta: "A prova do Nível 1 (6º e 7º anos) será realizada no dia 21 de maio de 2026." },
-    { pergunta: "pode fazer consulta na Fase 2", keywords: ["consulta", "calculadora", "ajuda"], resposta: "Não é permitida qualquer consulta. O uso de material externo ou ajuda resulta em desclassificação." },
-    { pergunta: "pode usar rascunho na prova", keywords: ["rascunho", "papel", "conta"], resposta: "Sim, será disponibilizada folha de rascunho, que deve ser entregue ao fiscal ao término da prova." },
-    { pergunta: "quais os horários da prova da Fase 2", keywords: ["horário", "manhã", "tarde", "noite"], resposta: "Manhã (8h às 9h20), Tarde (14h às 15h20) ou Noite (19h30 às 20h50)." },
-    { pergunta: "haverá segunda chamada na Fase 2", keywords: ["segunda chamada", "faltou", "falta de energia"], resposta: "Não haverá segundo dia para aplicação da prova, mesmo por falta de energia ou outros motivos." },
-
-    // 5. PREMIAÇÃO FASE II
-    { pergunta: "quem ganha medalha na Fase 2", keywords: ["medalha fase 2", "premiados", "5%"], resposta: "Serão premiados os 5% mais bem classificados por município em cada série e turno." },
-    { pergunta: "quem ganha medalha de ouro na Fase 2", keywords: ["ouro fase 2", "0,6%"], resposta: "A medalha de ouro vai para os estudantes entre os 0,6% melhores do município." },
-    { pergunta: "quem ganha medalha de prata na Fase 2", keywords: ["prata fase 2", "2%"], resposta: "A medalha de prata vai para quem estiver classificado entre 0,6% e 2% do município." },
-    { pergunta: "quem ganha medalha de bronze na Fase 2", keywords: ["bronze fase 2", "5%"], resposta: "A medalha de bronze vai para quem estiver classificado entre 2% e 5% do município." },
-    { pergunta: "como funciona o desempate na Fase 2", keywords: ["desempate", "critério", "fase 2"], resposta: "Preferência para quem teve maior nota na Fase 1 (Prova Paulista) e maior presença na escola." },
-    { pergunta: "professor ganha prêmio", keywords: ["professor", "medalha professor"], resposta: "Sim, professores recebem a Medalha Olímpica com base no desempenho de seus alunos premiados." },
-    { pergunta: "diretores ganham medalha", keywords: ["diretor", "escola prêmio"], resposta: "Sim, diretores das 20% melhores escolas de cada Regional (URE) recebem Medalha Olímpica." },
-
-    // 6. FASE III - CLASSIFICAÇÃO ESTADUAL
-    { pergunta: "quem participa da Fase 3", keywords: ["quem vai para fase 3", "classificação estadual"], resposta: "Participam da Fase 3 apenas os estudantes que obtiveram medalha de OURO na Fase 2." },
-    { pergunta: "quando é a prova da Fase 3", keywords: ["data fase 3", "6 de agosto"], resposta: "A prova da Fase 3 será realizada no dia 06 de agosto de 2026, às 9 horas da manhã." },
-    { pergunta: "onde é feita a prova da Fase 3", keywords: ["local fase 3", "onde"], resposta: "A prova é on-line, mas realizada em escolas específicas definidas pela Unidade Regional de Ensino (URE)." },
-    { pergunta: "como é a classificação da Fase 3", keywords: ["classificação estadual", "vencedores"], resposta: "A classificação final é feita por Nível (1, 2 e 3) para todo o Estado de São Paulo." },
-    { pergunta: "quantas medalhas de ouro tem na Fase 3", keywords: ["ouro fase 3", "75"], resposta: "São 75 medalhas de ouro para cada um dos três níveis (Total: 225)." },
-    { pergunta: "quantas medalhas de prata tem na Fase 3", keywords: ["prata fase 3", "170"], resposta: "São 170 medalhas de prata para cada um dos três níveis (Total: 510)." },
-    { pergunta: "quantas medalhas de bronze tem na Fase 3", keywords: ["bronze fase 3", "400"], resposta: "São 400 medalhas de bronze para cada um dos três níveis (Total: 1200)." },
-
-    // 7. PRÊMIOS ESPECIAIS E OBM
-    { pergunta: "o que ganham os primeiros colocados", keywords: ["obm", "vencedores", "convite"], resposta: "Os 75 primeiros de cada nível recebem convite para participar da Olimpíada Brasileira de Matemática (OBM)." },
-    { pergunta: "o que os medalhistas de ouro ganham", keywords: ["viagem", "são paulo", "visita", "palestra"], resposta: "Serão convidados para encontros, visitas e palestras sobre matemática na cidade de São Paulo." },
-    { pergunta: "onde recebo a medalha de ouro estadual", keywords: ["entrega medalha", "cerimônia"], resposta: "Medalhistas de ouro da Fase 3 recebem suas medalhas em São Paulo; Prata e Bronze recebem em suas regiões." },
-
-    // 8. OUTRAS REGRAS
-    { pergunta: "posso ser desclassificado", keywords: ["desclassificação", "regras", "consulta"], resposta: "Sim, por consulta durante as provas, comportamento inadequado ou por não estar matriculado na rede estadual." },
-    { pergunta: "como entrar em contato com a OMASP", keywords: ["e-mail", "contato", "suporte", "ajuda"], resposta: "O contato oficial é pelo e-mail: olimpiadassp@educacao.sp.gov.br." },
-    { pergunta: "o uso da imagem é permitido", keywords: ["imagem", "foto", "autorização"], resposta: "Sim, ao participar, aluno e responsável autorizam o uso de imagem para divulgação e publicidade da SEDUC-SP." }
-    
-    ];
-
-function encontrarResposta(perguntaUsuario) {
-    const busca = perguntaUsuario.toLowerCase().trim();
-    if (busca === "") return "Por favor, digite algo para que eu possa te ajudar!";
-
-    // 1. Tenta encontrar por frase exata na pergunta
-    for (let item of baseConhecimento) {
-        if (busca.includes(item.pergunta.toLowerCase())) {
-            return item.resposta;
-        }
-    }
-
-    // 2. Tenta encontrar por palavra-chave (Keyword)
-    // Dividimos a frase do usuário em palavras para conferir uma por uma
-    const palavrasUsuario = busca.split(/\s+/);
-    for (let item of baseConhecimento) {
-        for (let kw of item.keywords) {
-            if (busca.includes(kw.toLowerCase())) {
-                return item.resposta;
-            }
-        }
-    }
-
-    return "Desculpe, ainda não tenho essa informação. Tente pesquisar por termos simples como 'substantivo', 'romantismo' ou 'crase'.";
-}
-
-function sendMessage() {
-    const input = document.getElementById("userInput");
-    const chatBox = document.getElementById("chat-box");
-    const texto = input.value;
-
-    if (texto.trim() === "") return;
-
-    // Mensagem do Usuário
-    chatBox.innerHTML += `<div class="message user"><strong>Você:</strong> ${texto}</div>`;
-
-    // Processar Resposta
-    const resposta = encontrarResposta(texto);
-
-    // Resposta do Bot com delay
-    setTimeout(() => {
-        chatBox.innerHTML += `<div class="message bot"><strong>Assistente:</strong> ${resposta}</div>`;
-        chatBox.scrollTop = chatBox.scrollHeight;
-    }, 400);
-
-    input.value = "";
-    chatBox.scrollTop = chatBox.scrollHeight;
-}
-
-// Ouvir a tecla Enter
-document.getElementById("userInput").addEventListener("keypress", function(e) {
-    if (e.key === "Enter") {
-        sendMessage();
-    }
-});
-</script>
-
+<script src="dados.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
